@@ -373,7 +373,7 @@ st.markdown("ระบบวิเคราะห์เลข **ดับ** แ�
 # Sidebar สำหรับตั้งค่า
 with st.sidebar:
     st.header("⚙️ ตั้งค่าการคำนวณ")
-    lookback = st.slider("จำนวนงวดย้อนหลัง (Lookback)", 30, 200, 70)
+    lookback = st.slider("จำนวนงวดย้อนหลัง (Lookback)", 3, 200, 70)
     formula_limit = st.slider("จำกัดจำนวนสูตร (Max Formulas)", 100, 3000, 1000)
     
     st.markdown("---")
@@ -389,14 +389,14 @@ if target_mode == 'kill':
     options = list(char_to_index.keys())
     # สร้าง label สวยๆ ให้ Dropdown
     format_func = lambda x: f"{x} - {pos_desc.get(x, '')}"
-    selected_pos = st.selectbox("เลือกตำแหน่งที่ต้องการหาเลขดับ", options, format_func=format_func, index=12) # Default 'n'
+    selected_pos = st.selectbox("เลือกตำแหน่งที่ต้องการหาเลขดับ", options, format_func=format_func, index=0) # Default 'n'
     target_indices = [char_to_index[selected_pos]]
     target_name = f"เลขดับหลัก: {selected_pos.upper()}"
 else:
-    min_acc_default = 75.0
+    min_acc_default = 70.0
     options = list(pair_to_indices.keys())
     format_func = lambda x: f"{x} - {pos_desc.get(x, '')}"
-    selected_pos = st.selectbox("เลือกคู่ตำแหน่งที่ต้องการหาเลขวิ่ง", options, format_func=format_func, index=6) # Default 'no'
+    selected_pos = st.selectbox("เลือกคู่ตำแหน่งที่ต้องการหาเลขวิ่ง", options, format_func=format_func, index=0) # Default 'no'
     target_indices = pair_to_indices[selected_pos]
     target_name = f"เลขวิ่งคู่: {selected_pos.upper()}"
 
@@ -462,4 +462,5 @@ if st.button("🚀 เริ่มวิเคราะห์สูตร", type
 
 
         st.dataframe(df_stats.T)
+
 
